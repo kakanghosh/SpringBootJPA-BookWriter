@@ -22,7 +22,8 @@ public class BookService {
 	private List<Book> books = new ArrayList<Book>();
 
 	public List<Book> getBooks(Integer writerID) {
-		return this.bookRepository.findByWriterId(writerID);
+		//return this.bookRepository.findByWriterId(writerID);
+		return null;
 	}
 
 	public Optional<Book> getSingleBook(Integer writerID, Integer bookID) {
@@ -30,13 +31,13 @@ public class BookService {
 	}
 
 	public Book addBook(Integer writerID, Book book) {
-		book.setWriter(new Writer(writerID, ""));
+		//book.setWriter(new Writer(writerID, ""));
 		return this.bookRepository.save(book);
 	}
 
 	public Book updateBook(Integer writerID, Integer bookID, Book book) {
 		book.setId(bookID);
-		book.setWriter(new Writer(writerID, ""));
+		//book.setWriter(new Writer(writerID, ""));
 		return this.bookRepository.save(book);
 	}
 

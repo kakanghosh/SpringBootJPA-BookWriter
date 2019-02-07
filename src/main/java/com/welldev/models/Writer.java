@@ -1,26 +1,31 @@
 package com.welldev.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "writers")
 public class Writer {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "writers")
+	private Set<Book> books = new HashSet<>();
 
 	public Writer() {
 	}
 
 	public Writer(Integer id, String name) {
-		super();
 		this.id = id;
 		this.name = name;
 	}
@@ -41,9 +46,12 @@ public class Writer {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "Writer [id=" + id + ", name=" + name + "]";
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
 	}
 
 }

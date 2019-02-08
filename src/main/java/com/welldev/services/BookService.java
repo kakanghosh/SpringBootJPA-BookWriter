@@ -18,12 +18,13 @@ public class BookService {
 //	private List<Writer> writers = new ArrayList<Writer>(Arrays.asList(new Writer(1, "ABC"), new Writer(2, "DEF"),
 //			new Writer(3, "GHI"), new Writer(4, "JKL"), new Writer(5, "MNO")));
 	@Autowired
+	private WriterRepository writerRepository;
+	@Autowired
 	private BookRepository bookRepository;
 	private List<Book> books = new ArrayList<Book>();
 
 	public List<Book> getBooks(Integer writerID) {
-		//return this.bookRepository.findByWriterId(writerID);
-		return null;
+		return new ArrayList<Book>(writerRepository.findById(writerID).get().getBooks());
 	}
 
 	public Optional<Book> getSingleBook(Integer writerID, Integer bookID) {
@@ -31,8 +32,10 @@ public class BookService {
 	}
 
 	public Book addBook(Integer writerID, Book book) {
-		//book.setWriter(new Writer(writerID, ""));
-		return this.bookRepository.save(book);
+		Optional<Writer> writer = this.writerRepository.findById(writerID);
+		//writer.get().getBooks().add(book);
+		book.getWriters().add(writer.get());
+		return bookRepository.save(book);
 	}
 
 	public Book updateBook(Integer writerID, Integer bookID, Book book) {

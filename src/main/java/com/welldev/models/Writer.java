@@ -12,6 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "writers")
 public class Writer {
@@ -19,7 +24,7 @@ public class Writer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "writers")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, mappedBy = "writers")
 	private Set<Book> books = new HashSet<>();
 
 	public Writer() {
@@ -52,6 +57,11 @@ public class Writer {
 
 	public void setBooks(Set<Book> books) {
 		this.books = books;
+	}
+
+	@Override
+	public String toString() {
+		return "Writer [id=" + id + ", name=" + name+"]";
 	}
 
 }

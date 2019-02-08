@@ -1,7 +1,6 @@
 package com.welldev.services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +19,14 @@ public class WriterService {
 	private List<Writer> writers = new ArrayList<Writer>();
 
 	public List<Writer> getWriters() {
-		this.setWriters(writerRepository.findAll());
-		return writers;
+		try {
+			this.setWriters(writerRepository.findAll());
+			System.out.println(writers);
+			return writers;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
 	}
 
 	public void setWriters(List<Writer> writers) {

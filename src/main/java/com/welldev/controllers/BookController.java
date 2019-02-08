@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.welldev.models.Book;
-import com.welldev.models.Writer;
 import com.welldev.services.BookService;
-import com.welldev.services.WriterService;
 
 @RestController
 public class BookController {

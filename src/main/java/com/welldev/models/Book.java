@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "books")
 public class Book {
@@ -24,6 +26,7 @@ public class Book {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "book_writers", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "writer_id") })
+	@JsonIgnore
 	private Set<Writer> writers = new HashSet<>();
 
 	public Book() {
@@ -56,6 +59,11 @@ public class Book {
 
 	public void setWriters(Set<Writer> writers) {
 		this.writers = writers;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", name=" + name + "]";
 	}
 
 }

@@ -26,24 +26,25 @@ public class SpringRestApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		this.writerRepository.deleteAllInBatch();
-		this.bookRepository.deleteAllInBatch();
-
-		// Creating Writers
-		Writer writer = new Writer(null, "Mr. ABC");
-		Writer writer2 = new Writer(null, "Mr. XYZ");
-
-		// Creating Books
-		Book book1 = new Book(null, "Introduction to C");
-		Book book2 = new Book(null, "Introduction to CPP");
-
-		writer.getBooks().add(book1);
-		writer.getBooks().add(book2);
-
-		book1.getWriters().add(writer);
-		book1.getWriters().add(writer2);
-		book2.getWriters().add(writer);
-
-		writerRepository.save(writer);
+		
+		  this.writerRepository.deleteAllInBatch();
+		  this.bookRepository.deleteAllInBatch();
+		  
+		  // Creating Writers 
+		  Writer writer = new Writer(null, "Mr. ABC"); 
+		  Writer writer2 = new Writer(null, "Mr. XYZ");
+		  // Creating Books 
+		  Book book1 = new Book(null, "Introduction to C"); 
+		  Book book2 = new Book(null, "Introduction to CPP");
+		  
+		  writer.getBooks().add(book1);
+		  writer.getBooks().add(book2);
+		  
+		  book1.getWriters().add(writer);
+		  book1.getWriters().add(writer2);
+		  book2.getWriters().add(writer);
+		  
+		  writerRepository.save(writer);
+		 
 	}
 }

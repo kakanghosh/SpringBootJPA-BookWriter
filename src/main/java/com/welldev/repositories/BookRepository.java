@@ -1,7 +1,5 @@
 package com.welldev.repositories;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.welldev.models.Book;
